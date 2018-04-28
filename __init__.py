@@ -43,12 +43,19 @@ def hello():
         host='localhost')
     c = conn.cursor()
 
-    c.execute("INSERT INTO gruposfuncionales VALUES ('H20', 'C-O')")
+    c.execute("INSERT INTO gruposfuncionales VALUES ('H-O', 'C-O')")
     conn.commit()
 
     c.execute("SELECT * FROM gruposfuncionales")
-    return r[0]
 
+    rv = c.fetchall()
+    payload = []
+    content = {}
+    for result in rv:
+        content = {'id': result[0], 'username': result[1]}
+        payload.append(content)
+        content = {}
+    return jsonify(payload)    
 
 @app.after_request
 def after_request(response):
