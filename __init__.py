@@ -9,7 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 
-@app.route('/porcentaje',methods=['GET','POST'])
+@app.route('/porcentajes',methods=['GET','POST'])
 def porcentaje():
     if request.method == 'POST':
         datos = request.json
