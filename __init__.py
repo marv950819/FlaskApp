@@ -49,7 +49,7 @@ def hello():
     c.execute("SELECT * FROM gruposfuncionales")
     # print([(r[0], r[1]) for r in c.fetchall()])
 
-    return c.fetchall()
+    return  'hola'
 
 @app.after_request
 def after_request(response):
