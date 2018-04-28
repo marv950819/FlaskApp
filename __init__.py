@@ -4,12 +4,13 @@ import numpy as np
 import pandas as pd
 from scipy import signal
 import json
+import pymysql
 from flask_cors import CORS
 
 app = Flask(__name__)
 
 
-@app.route('/porcentajes',methods=['GET','POST'])
+@app.route('/porcentaje',methods=['GET','POST'])
 def porcentaje():
     if request.method == 'POST':
         datos = request.json
@@ -35,7 +36,20 @@ def porcentaje():
 
 @app.route("/")
 def hello():
-    return "Ya funciona flask!"
+    conn = pymysql.connect(
+        db='susntancias',
+        user='root',
+        passwd='12345678',
+        host='localhost')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO gruposfuncionales VALUES ('H20', 'C-O')")
+    conn.commit()
+
+    c.execute("SELECT * FROM gruposfuncionales")
+    # print([(r[0], r[1]) for r in c.fetchall()])
+
+    return c.fetchall()
 
 @app.after_request
 def after_request(response):
