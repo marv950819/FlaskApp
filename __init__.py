@@ -64,12 +64,13 @@ def gruposfuncionales():
         gruposDb = pd.DataFrame(payload)
 
         gruposFuncionales = []
-        for index, row in gruposDb.iterrows():
-            for x in picos.x:
-                if x in range(row['Rango1'],row['Rango2']):
-                    #print (row['id_GF'],row['name_GF'],x,row['Rango1'],row['Rango2'])
-                    gruposFuncionales.append({'picos_x':x,'id_GF': row['id_GF'], 'name_GF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2']})
+        for index, row in df.iterrows():
+            for index, coordenada in picos.iterrows():
+                if coordenada.x in range(row['Rango1'],row['Rango2']):
+                    print (row['id_GF'],row['name_GF'],coordenada.x,row['Rango1'],row['Rango2'],coordenada.y)
+                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2']})
            
+   
         return jsonify(gruposFuncionales)    
 
     if request.method == 'GET':
