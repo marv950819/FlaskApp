@@ -60,6 +60,9 @@ def gruposfuncionales():
             content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
             payload.append(content)
             content = {}
+
+        gruposDb = pd.DataFrame(payload)
+        
         return jsonify(payload)    
 
     if request.method == 'GET':
