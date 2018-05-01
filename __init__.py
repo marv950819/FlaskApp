@@ -67,7 +67,6 @@ def gruposfuncionales():
         for index, row in df.iterrows():
             for index, coordenada in picos.iterrows():
                 if coordenada.x in range(row['Rango1'],row['Rango2']):
-                    print (row['id_GF'],row['name_GF'],coordenada.x,row['Rango1'],row['Rango2'],coordenada.y)
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2']})
            
    
