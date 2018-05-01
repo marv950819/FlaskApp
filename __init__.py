@@ -38,11 +38,11 @@ def porcentaje():
 def gruposfuncionales():
     if request.method == 'POST':
         datos = request.json
-        convert = pd.DataFrame.from_dict(datos, orient='index')
-        coordenadas = convert.transpose()
-        coordenadas = coordenadas.convert_objects(convert_numeric=True)
-        picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
-        picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
+        picos = pd.DataFrame.from_dict(datos, orient='index')
+        # coordenadas = convert.transpose()
+        # coordenadas = coordenadas.convert_objects(convert_numeric=True)
+        # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
+        # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
 
         conn = pymysql.connect(
             db='prueba',
