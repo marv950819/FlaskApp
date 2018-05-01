@@ -37,12 +37,12 @@ def porcentaje():
 @app.route("/gruposfuncionales",methods=['GET','POST'])
 def gruposfuncionales():
     if request.method == 'POST':
-    # datos = request.json
-    # convert = pd.DataFrame.from_dict(datos, orient='index')
-    # coordenadas = convert.transpose()
-    # coordenadas = coordenadas.convert_objects(convert_numeric=True)
-    # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
-    # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
+        datos = request.json
+        convert = pd.DataFrame.from_dict(datos, orient='index')
+        coordenadas = convert.transpose()
+        coordenadas = coordenadas.convert_objects(convert_numeric=True)
+        picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
+        picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
 
         conn = pymysql.connect(
             db='prueba',
@@ -60,7 +60,7 @@ def gruposfuncionales():
             content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
             payload.append(content)
             content = {}
-        return jsonify(payload)    
+        return jsonify(picos)    
 
     if request.method == 'GET':
         return "Metodo Get"
