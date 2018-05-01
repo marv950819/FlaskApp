@@ -34,7 +34,7 @@ def porcentaje():
     else:
         return "nada de nada"
 
-@app.route("/gruposfuncionales")
+@app.route("/gruposfuncionales",methods=['GET','POST'])
 def gruposfuncionales():
     if request.method == 'POST':
     # datos = request.json
