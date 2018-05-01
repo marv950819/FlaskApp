@@ -27,7 +27,7 @@ def porcentaje():
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
         result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100) }
         #result = {'resultado_size':len(picos.index)}
-	return  jsonify(picos)
+	return  jsonify(result)
         #return  resultado.to_json()
     if request.method == 'GET':
         return "Metodo GET"
@@ -38,12 +38,12 @@ def porcentaje():
 def gruposfuncionales():
     if request.method == 'POST':
         datos = request.json
-        picos = pd.DataFrame.from_dict(datos, orient='index')
-        # coordenadas = convert.transpose()
-        # coordenadas = coordenadas.convert_objects(convert_numeric=True)
-        # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
-        # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
-|   
+        convert = pd.DataFrame.from_dict(datos, orient='index')
+        coordenadas = convert.transpose()
+        coordenadas = coordenadas.convert_objects(convert_numeric=True)
+        picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
+        picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
+
         conn = pymysql.connect(
             db='prueba',
             user='root',
@@ -60,7 +60,7 @@ def gruposfuncionales():
             content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
             payload.append(content)
             content = {}
-        return jsonify(picos)    
+        return jsonify(payload)    
 
     if request.method == 'GET':
         return "Metodo Get"
