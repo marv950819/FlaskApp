@@ -43,7 +43,7 @@ def gruposfuncionales():
         host='localhost')
     c = conn.cursor()
 
-    c.execute("SELECT * FROM gruposfuncionales")
+    c.execute("SELECT * FROM GruposFuncionales")
 
     rv = c.fetchall()
     payload = []
