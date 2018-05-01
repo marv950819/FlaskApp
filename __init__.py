@@ -36,23 +36,37 @@ def porcentaje():
 
 @app.route("/gruposfuncionales")
 def gruposfuncionales():
-    conn = pymysql.connect(
-        db='prueba',
-        user='root',
-        passwd='12345678',
-        host='localhost')
-    c = conn.cursor()
+    if request.method == 'POST':
+    # datos = request.json
+    # convert = pd.DataFrame.from_dict(datos, orient='index')
+    # coordenadas = convert.transpose()
+    # coordenadas = coordenadas.convert_objects(convert_numeric=True)
+    # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
+    # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
 
-    c.execute("SELECT * FROM GruposFuncionales")
+        conn = pymysql.connect(
+            db='prueba',
+            user='root',
+            passwd='12345678',
+            host='localhost')
+        c = conn.cursor()
 
-    rv = c.fetchall()
-    payload = []
-    content = {}
-    for result in rv:
-        content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
-        payload.append(content)
+        c.execute("SELECT * FROM GruposFuncionales")
+
+        rv = c.fetchall()
+        payload = []
         content = {}
-    return jsonify(payload)    
+        for result in rv:
+            content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
+            payload.append(content)
+            content = {}
+        return jsonify(payload)    
+
+    if request.method == 'GET':
+        return "Metodo Get"
+
+
+
 
 @app.after_request
 def after_request(response):
