@@ -27,7 +27,7 @@ def porcentaje():
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
         result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100) }
         #result = {'resultado_size':len(picos.index)}
-	return  jsonify(result)
+	return  jsonify(picos)
         #return  resultado.to_json()
     if request.method == 'GET':
         return "Metodo GET"
@@ -43,7 +43,7 @@ def gruposfuncionales():
         # coordenadas = coordenadas.convert_objects(convert_numeric=True)
         # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
         # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
-
+|   
         conn = pymysql.connect(
             db='prueba',
             user='root',
