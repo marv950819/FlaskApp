@@ -36,16 +36,16 @@ def porcentaje():
 
 @app.route("/gruposfuncionales")
 def gruposfuncionales():
-if request.method == 'POST':
-    datos = request.json
-    convert = pd.DataFrame.from_dict(datos, orient='index')
-    coordenadas = convert.transpose()
-    coordenadas = coordenadas.convert_objects(convert_numeric=True)
-    picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
-    picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
+if request.method == 'GET':
+    # datos = request.json
+    # convert = pd.DataFrame.from_dict(datos, orient='index')
+    # coordenadas = convert.transpose()
+    # coordenadas = coordenadas.convert_objects(convert_numeric=True)
+    # picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
+    # picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
 
     conn = pymysql.connect(
-        db='susntancias',
+        db='prueba',
         user='root',
         passwd='12345678',
         host='localhost')
