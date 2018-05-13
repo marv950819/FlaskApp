@@ -27,7 +27,7 @@ def porcentaje():
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
         result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100) }
         #result = {'resultado_size':len(picos.index)}
-	return  jsonify(result)
+	return  jsonify(resultado)
         #return  resultado.to_json()
     if request.method == 'GET':
         return "Metodo GET"
@@ -80,7 +80,7 @@ def gruposfuncionales():
 
 @app.after_request
 def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', 'http://http://165.227.87.101')
+  response.headers.add('Access-Control-Allow-Origin', 'http://198.199.91.102')
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   response.headers.add('Access-Control-Allow-Credentials', 'true')
