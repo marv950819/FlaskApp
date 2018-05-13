@@ -57,7 +57,7 @@ def gruposfuncionales():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_GF': result[0], 'name_GF': result[1] , 'Rango1': result[2],'Rango2':result[3]}
+            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5]}
             payload.append(content)
             content = {}
 
