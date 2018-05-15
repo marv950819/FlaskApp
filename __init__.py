@@ -22,7 +22,7 @@ def porcentaje():
         coordenadas_x_y = coordenadas[['x','y']]
         xs = coordenadas_x_y.y
         datos = np.sin(xs)
-        peakind = signal.find_peaks_cwt(datos, np.arange(0.1,1,0.1))
+        peakind = signal.find_peaks_cwt(datos, np.arange(1,100,1))
         resultado = pd.concat([coordenadas_x_y.x[peakind],coordenadas_x_y.y[peakind]], axis=1)
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
         json_result = {'x':resultado.x.values.tolist(),'y':resultado.y.values.tolist()}
