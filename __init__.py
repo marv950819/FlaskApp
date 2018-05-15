@@ -25,7 +25,7 @@ def porcentaje():
         peakind = signal.find_peaks_cwt(datos, np.arange(0.1,1,0.1))
         resultado = pd.concat([coordenadas_x_y.x[peakind],coordenadas_x_y.y[peakind]], axis=1)
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
-        json_result = {'x':resultado.x,'y':resultado.y}
+        json_result = {'x':resultado.x.values.tolist(),'y':resultado.y.values.tolist()}
         result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100),'picos':resultado}
         #result = {'resultado_size':len(picos.index)}
         return  jsonify(json_result)
