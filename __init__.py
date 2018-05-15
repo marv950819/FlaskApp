@@ -27,7 +27,7 @@ def porcentaje():
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
         result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100),'picos':resultado}
         #result = {'resultado_size':len(picos.index)}
-        return  jsonify(result)
+        return  result
         #return  resultado.to_json()
     if request.method == 'GET':
         return "Metodo GET"
