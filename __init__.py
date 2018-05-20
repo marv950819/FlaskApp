@@ -10,6 +10,25 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 
+@app.route('/smooth',methods=['GET','POST'])
+def smooth():
+    if request.method == 'POST':
+        datos = request.json
+        convert = pd.DataFrame.from_dict(datos, orient='index')
+        coordenadas = convert.transpose()
+        coordenadas = coordenadas.convert_objects(convert_numeric=True)
+        coordenadas_x_y = coordenadas[['x','y']]
+        y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
+        x = (coordenadas_x_y.x).to_dict()
+        json_result = {'x':coordenadas_x_y.x.values.tolist(),'y':y.tolist()}
+        return  jsonify(json_result)
+    if request.method == 'GET':
+        return "Metodo GET"
+    else:
+        return "nada de nada"
+
+
+
 @app.route('/porcentaje',methods=['GET','POST'])
 def porcentaje():
     if request.method == 'POST':
@@ -78,6 +97,16 @@ def gruposfuncionales():
         return "Metodo Get"
 
 
+@app.route('/Compuesto',methods=['GET','POST'])
+def compuesto():
+    if request.method == 'POST':
+        datos = request.json
+        convert = pd.DataFrame.from_dict(datos, orient='index')
+        return jsonify(convert)    
+   
+
+    if request.method == 'GET':
+        return "Metodo GET"
 
 
 @app.after_request
