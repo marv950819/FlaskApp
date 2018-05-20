@@ -83,7 +83,7 @@ def compuesto():
     if request.method == 'POST':
         datos = request.json
         convert = pd.DataFrame.from_dict(datos, orient='index')
-        return jsonify(convert)    
+        return jsonify(convert.to_json())    
    
 
     if request.method == 'GET':
