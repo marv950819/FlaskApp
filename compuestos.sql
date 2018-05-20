@@ -16,6 +16,7 @@ CREATE TABLE GruposFuncionales(
   name_GF VARCHAR(30),
   Rango1 INT,
   Rango2 INT,
+  Ponderacion INT,
   PRIMARY KEY (id_GF),
   CONSTRAINT fk_id_Compuesto FOREIGN KEY (id_Compuesto) REFERENCES Compuesto(id_Compuesto)
 )
@@ -31,24 +32,25 @@ ENGINE = INNODB;
 
 
 
-INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2) VALUES
-("Yeso","H20", 3600, 3500),
-("Yeso","CaSO4-2H2O", 3385, 3405),
-("Yeso","CaSO4-2H2O", 3479,3499),
-("Yeso","CaSO4-2H2O", 998, 1018),
-("Yeso","CaSO4-2H2O", 1125, 1145),
-("Yeso","CaSO4", 864, 884),
-("Yeso","CaSO4-1/2H2O", 999,1017),
-("Yeso","CaC03", 722,732),
-("Yeso","CaC03", 1415,1435),
-("Yeso","CaC03", 872,900);
+INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,Ponderacion) VALUES
+("Yeso","H20", 3600, 3500, 3),
+("Yeso","CaSO4-2H2O", 3385, 3405, 7),
+("Yeso","CaSO4-2H2O", 3479,3499, 7),
+("Yeso","CaSO4-2H2O", 998, 1018, 7),
+("Yeso","CaSO4-2H2O", 1125, 1145, 7),
+("Yeso","CaSO4", 864, 884, 4),
+("Yeso","CaSO4", 682, , 4),
+("Yeso","CaSO4-1/2H2O", 999,1017, 5),
+("Yeso","CaC03", 722,732, 8),
+("Yeso","CaC03", 1415,1435, 8),
+("Yeso","CaC03", 872,900, 8);
 
 
-INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2) VALUES
-("Cuarzo","Si-O", 1100,1200),
-("Cuarzo","Si-O-Si", 1000,1100),
-("Cuarzo","Si-O", 770,800),
-("Cuarzo","Si-O", 400,550);
+INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,Ponderacion) VALUES
+("Cuarzo","Si-O", 1100,1200, 6),
+("Cuarzo","Si-O-Si", 1000,1100, 4),
+("Cuarzo","Si-O", 770,800, 4),
+("Cuarzo","Si-O", 400,550, 4);
 
 
 (, "CaSO4-1/2H2O", 999,1017),
