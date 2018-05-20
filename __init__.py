@@ -20,7 +20,7 @@ def porcentaje():
         picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
         picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
         coordenadas_x_y = coordenadas[['x','y']]
-        y = signal.savgol_filter(coordenadas_x_y.y, 50, 3)
+        y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
         xs = y 
         datos = np.sin(xs)
         peakind = signal.find_peaks_cwt(datos, np.arange(1,100))
