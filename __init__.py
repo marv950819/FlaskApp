@@ -82,7 +82,7 @@ def gruposfuncionales():
 def compuesto():
     if request.method == 'POST':
         datos = request.json
-        tableGF = pd.DataFrame(request)
+        tableGF = pd.DataFrame(datos)
         uniqueGF = tableGF.drop_duplicates(subset='grupoF', keep="last")
     
 
