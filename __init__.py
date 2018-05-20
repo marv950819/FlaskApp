@@ -60,7 +60,7 @@ def gruposfuncionales():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5]}
+            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5],'Ponderacion':result[6]}
             payload.append(content)
             content = {}
 
@@ -70,8 +70,7 @@ def gruposfuncionales():
         for index, row in gruposDb.iterrows():
             for index, coordenada in picos.iterrows():
                 if coordenada.x in range(row['Rango1'],row['Rango2']):
-                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2']})
-           
+                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'Ponderacion':row['Ponderacion']})
    
         return jsonify(gruposFuncionales)    
 

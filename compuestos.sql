@@ -33,14 +33,14 @@ ENGINE = INNODB;
 
 
 INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,Ponderacion) VALUES
-("Yeso","H20", 3600, 3500, 3),
-("Yeso","CaSO4-2H2O", 3385, 3405, 7),
-("Yeso","CaSO4-2H2O", 3479,3499, 7),
-("Yeso","CaSO4-2H2O", 998, 1018, 7),
-("Yeso","CaSO4-2H2O", 1125, 1145, 7),
-("Yeso","CaSO4", 864, 884, 4),
-("Yeso","CaSO4", 682, , 4),
-("Yeso","CaSO4-1/2H2O", 999,1017, 5),
+("Yeso","H20", 3500, 3600, 3),
+("Yeso","SO4-2H2O", 3385, 3405, 7),
+("Yeso","SO4-2H2O", 3479,3499, 7),
+("Yeso","SO4-2H2O", 1016, 1018, 7),
+("Yeso","SO4-2H2O", 1125, 1145, 7),
+("Yeso","SO4", 864, 884, 4),
+("Yeso","SO4", 670,682 , 4),
+("Yeso","SO4-1/2H2O", 1004,1015, 5),
 ("Yeso","CaC03", 722,732, 8),
 ("Yeso","CaC03", 1415,1435, 8),
 ("Yeso","CaC03", 872,900, 8);
