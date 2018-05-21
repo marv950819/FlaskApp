@@ -20,8 +20,8 @@ def porcentaje():
         picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
         picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
         coordenadas_x_y = coordenadas[['x','y']]
-        y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
-        xs = y 
+        #y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
+        xs = coordenadas_x_y.y
         datos = np.sin(xs)
         peakind = signal.find_peaks_cwt(datos, np.arange(1,100))
         resultado = pd.concat([coordenadas_x_y.x[peakind],coordenadas_x_y.y[peakind]], axis=1)
@@ -86,7 +86,7 @@ def compuesto():
         uniqueGF = tableGF.drop_duplicates(subset='grupoF', keep="last")
     
 
-        return jsonify(uniqueGF.to_json())    
+        return jsonify(uniqueGF)    
    
 
     if request.method == 'GET':
