@@ -20,15 +20,14 @@ def porcentaje():
         picos = (coordenadas[['picos_x','picos_y']]).dropna(how='all')
         picos = picos.rename(columns={"picos_x": "x", "picos_y": "y"})
         coordenadas_x_y = coordenadas[['x','y']]
-        #y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
         xs = coordenadas_x_y.y
         datos = np.sin(xs)
         peakind = signal.find_peaks_cwt(datos, np.arange(1,45))
         resultado = pd.concat([coordenadas_x_y.x[peakind],coordenadas_x_y.y[peakind]], axis=1)
         resultado = resultado[resultado.y > 0.01]
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
-        json_result = {'picos_x':resultado.x.values.tolist(),'picos_y':resultado.y.values.tolist()}
-        result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100),'picos':resultado}
+        json_result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100),'picos_x':resultado.x.values.tolist(),'picos_y':resultado.y.values.tolist()}
+        #result = {'porcentaje':((len(porcentaje.index)/len(picos.index))*100),'picos':resultado}
         #result = {'resultado_size':len(picos.index)}
         return  jsonify(json_result)
         #return  resultado.to_json()
