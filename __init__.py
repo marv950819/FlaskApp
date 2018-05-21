@@ -23,7 +23,7 @@ def porcentaje():
         #y = signal.savgol_filter(coordenadas_x_y.y, 53, 3)
         xs = coordenadas_x_y.y
         datos = np.sin(xs)
-        peakind = signal.find_peaks_cwt(datos, np.arange(1,30))
+        peakind = signal.find_peaks_cwt(datos, np.arange(1,50))
         resultado = pd.concat([coordenadas_x_y.x[peakind],coordenadas_x_y.y[peakind]], axis=1)
         resultado = resultado[resultado.y > 0.01]
         porcentaje = pd.merge( picos, resultado, on=['x','y'] )
