@@ -68,7 +68,7 @@ def gruposfuncionales():
         gruposFuncionales = []
         for index, row in gruposDb.iterrows():
             for index, coordenada in picos.iterrows():
-                if coordenada.x in range(row['Rango1'],row['Rango2'],0.01):  
+                if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'Ponderacion':row['Ponderacion']})
    
         return jsonify(gruposFuncionales)    
