@@ -6,7 +6,7 @@ from scipy import signal
 import json
 import pymysql
 from flask_cors import CORS
-
+from Greetings import Greetings
 app = Flask(__name__)
 
 
@@ -83,9 +83,18 @@ def compuesto():
         datos = request.json
         tableGF = pd.DataFrame(datos)
         uniqueGF = tableGF.drop_duplicates(subset='grupoF', keep="last")
-    
+        sumaPonderacion = 0
+        for ponderacion in uniqueGF.Ponderacion:
+            sumaPonderacion = ponderacion + sumaPonderacion
 
-        return jsonify(uniqueGF)    
+        engine = Greetings()
+        engine.reset(sumaPonderacion = suma) # Prepare the engine for the execution.
+        engine.run() 
+
+        compuestoClave = [[y for y in engine.facts[x].values()][0] for x in engine.facts if 'compuestos' in engine.facts[x].keys()] #[3]['compuestos']
+        compuestoClave[0] 
+        Compuesto = {'Compuesto':compuestoClave[0] }
+        return jsonify(Compuesto)    
    
 
     if request.method == 'GET':
