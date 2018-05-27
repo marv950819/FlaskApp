@@ -88,8 +88,9 @@ def gruposfuncionales():
         if sumaPonderacion == 31:
             compuesto = 'Calcita-Cuarzo'
         else : 
-            compuesto = 'no se identifico'   
-            
+            compuesto = 'no se identifico' 
+              
+        gruposFuncionales.append({'sumaPonderacion':sumaPonderacion})     
         gruposFuncionales.append({'Compuesto':compuesto})           
         return jsonify(gruposFuncionales)    
 
