@@ -58,7 +58,7 @@ def gruposfuncionales():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5],'Ponderacion':result[6]}
+            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5],'estado':result[6]}
             payload.append(content)
             content = {}
 
@@ -68,30 +68,54 @@ def gruposfuncionales():
         for index, row in gruposDb.iterrows():
             for index, coordenada in picos.iterrows():
                 if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
-                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'Ponderacion':row['Ponderacion']})
+                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'estado':row['estado']})
         
         GF = pd.DataFrame(gruposFuncionales)
 
         uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
-        sumaPonderacion = 0
-        for ponderacion in uniqueGF.Ponderacion:
-            sumaPonderacion = ponderacion + sumaPonderacion
+        compuestoEstado=[]
+        for estado in uniqueGF.estado:
+            compuestoEstado.append(estado)
 
-        if (sumaPonderacion == 30):
-            compuesto = 'Yeso-Crudo'
-        elif (sumaPonderacion == 20):
-            compuesto = 'Basanita'
-        elif( sumaPonderacion == 19):
-            compuesto = 'Anhidrita'
-        elif (sumaPonderacion == 24):
-            compuesto = 'Calcita-Cuarzo'
-        elif (sumaPonderacion == 31):
-            compuesto = 'Calcita-Cuarzo'
-        else : 
-            compuesto = 'no se identifico' 
+        dfa = {0:{'0':1, '1':3},
+        1:{'0':17, '1':2},
+        2:{'0':17, '1':12},
+        3:{'0':16, '1':4},
+        4:{'0':6, '1':5},
+        5:{'0':17, '1':7},
+        6:{'0':9, '1':8},
+        7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
+        8:{'0':'Basanita', '1':'Basanita'},
+        9:{'0':17, '1':11},
+        10:{'0':16, '1':15},
+        11:{'0':'Anhidrita', '1':'Anhidrita'},
+        12:{'0':'Cuarzo', '1':'Cuarzo'},
+        16:{'0':17, '1':18},
+        18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
+        17:{'0':'No se encontró', '1':'No se encontró'}
+        }
 
         
-        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
+        gruFun={}
+        for key in dfa:
+            if key in compuestoEstado:
+                state = 1 
+            else: 
+                state = 0
+            gruFun[str(key)]=state 
+
+        state = 0
+        accepting = {7,12,8,11,18,17}
+        for c in gruFun :
+            if state in accepting:
+                state = dfa[state][str(gruFun[str(state)])]
+                return state 
+            else:
+                state = dfa[state][str(gruFun[str(state)])]  
+
+
+        
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}                 
         return jsonify(compuestosGF)    
 
     if request.method == 'GET':
