@@ -92,7 +92,7 @@ def gruposfuncionales():
         12:{'0':'Cuarzo', '1':'Cuarzo'},
         16:{'0':17, '1':18},
         18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
-        17:{'0':'No se ha encontrado', '1':'No se ha encontrado'}
+        17:{'0':'No se ha encontrado', '1':'No se ha encontrado'},
         19:{'0':12, '1':4}
         }
           
