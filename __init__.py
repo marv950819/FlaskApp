@@ -89,8 +89,7 @@ def gruposfuncionales():
             compuesto = 'Calcita-Cuarzo'
         else : 
             compuesto = 'no se identifico' 
-
-        gruposFuncionales.append({'uniqueGF':uniqueGF.tolist()})      
+              
         gruposFuncionales.append({'sumaPonderacion':sumaPonderacion})     
         gruposFuncionales.append({'Compuesto':compuesto})           
         return jsonify(gruposFuncionales)    
