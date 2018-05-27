@@ -109,7 +109,6 @@ def gruposfuncionales():
         for c in gruFun :
             if state in accepting:
                 state = dfa[state][str(gruFun[str(state)])]
-                return state 
             else:
                 state = dfa[state][str(gruFun[str(state)])]  
 
