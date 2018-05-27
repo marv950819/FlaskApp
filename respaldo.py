@@ -77,44 +77,19 @@ def gruposfuncionales():
         for ponderacion in uniqueGF.Ponderacion:
             sumaPonderacion = ponderacion + sumaPonderacion
 
-        dfa = {0:{'0':1, '1':3},
-           1:{'0':17, '1':2},
-           2:{'0':17, '1':12},
-           3:{'0':16, '1':4},
-           4:{'0':6, '1':5},
-           5:{'0':17, '1':7},
-           6:{'0':9, '1':8},
-           7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
-           8:{'0':10, '1':10},
-           9:{'0':17, '1':11},
-           10:{'0':16, '1':15},
-           11:{'0':10, '1':10},
-           12:{'0':'Cuarzo', '1':'Cuarzo'},
-           16:{'0':17, '1':18},
-           18:{'0':17, '1':19},
-           17:{'0':17, '1':17}
-        }
+        if (sumaPonderacion == 30):
+            compuesto = 'Yeso-Crudo'
+        elif (sumaPonderacion == 20):
+            compuesto = 'Basanita'
+        elif( sumaPonderacion == 19):
+            compuesto = 'Anhidrita'
+        elif (sumaPonderacion == 24):
+            compuesto = 'Calcita-Cuarzo'
+        elif (sumaPonderacion == 31):
+            compuesto = 'Calcita-Cuarzo'
+        else : 
+            compuesto = 'no se identifico' 
 
-
-        def accepts(transitions,initial,accepting,s):
-            state = initial
-            for c in s :
-                if state in accepting:
-                    state = transitions[state][c]
-                    return state 
-                else:
-                    state = transitions[state][c]
-            return state 
-            
-        gruFun=''
-        s = [1,2]
-        for a in dfa:
-            if a in s:
-                 state = 1 
-            else: 
-                state = 0
-            gruFun = gruFun +str(state)
-        compuesto = accepts(dfa,0,{7,12,8,11,19},gruFun)
         
         compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
         return jsonify(compuestosGF)    
