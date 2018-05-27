@@ -72,14 +72,14 @@ def gruposfuncionales():
         
         GF = pd.DataFrame(gruposFuncionales)
 
-        uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
+        uniqueGF = GF.drop_duplicates(subset='grupoF,estado', keep="last")
         compuestoEstado=[]
         for estado in uniqueGF.estado:
             compuestoEstado.append(estado)
 
         dfa = {0:{'0':1, '1':3},
         1:{'0':3, '1':2},
-        2:{'0':17, '1':3},
+        2:{'0':17, '1':19},
         3:{'0':16, '1':4},
         4:{'0':6, '1':5},
         5:{'0':17, '1':7},
@@ -93,7 +93,7 @@ def gruposfuncionales():
         16:{'0':17, '1':18},
         18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
         17:{'0':'No se ha encontrado', '1':'No se ha encontrado'}
-       
+        19:{'0':12, '1':4}
         }
           
 
