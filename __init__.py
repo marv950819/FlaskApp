@@ -69,7 +69,28 @@ def gruposfuncionales():
             for index, coordenada in picos.iterrows():
                 if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'Ponderacion':row['Ponderacion']})
-   
+        
+        uniqueGF = gruposFuncionales.drop_duplicates(subset='grupoF', keep="last")
+        sumaPonderacion = 0
+        for ponderacion in uniqueGF.Ponderacion:
+            sumaPonderacion = ponderacion + sumaPonderacion
+
+        if sumaPonderacion == 30:
+            compuesto = 'Yeso-Crudo'
+        if sumaPonderacion == 20:
+            compuesto = 'Basanita'
+        if sumaPonderacion == 19:
+            compuesto = 'Anhidrita'
+        if sumaPonderacion == 24:
+            compuesto = 'Calcita-Cuarzo'
+        if sumaPonderacion == 31:
+            compuesto = 'Calcita-Cuarzo'   
+            
+        gruposFuncionales.append({'Compuesto':compuesto})
+        
+        Compuesto = {'Compuesto':compuesto}            
+
+
         return jsonify(gruposFuncionales)    
 
     if request.method == 'GET':
