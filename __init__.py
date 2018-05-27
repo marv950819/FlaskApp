@@ -94,7 +94,28 @@ def gruposfuncionales():
         18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
         17:{'0':'No se encontro', '1':'No se encontro'}
         }
-                
+          
+
+        gruFun={}
+        for key in dfa:
+            if key in compuestoEstado:
+                state = 1 
+            else: 
+                state = 0
+            gruFun[str(key)]=state 
+
+        state = 0
+        accepting = {7,12,8,11,18,17}
+        for c in gruFun :
+            if state in accepting:
+                state = dfa[state][str(gruFun[str(state)])]
+                return state 
+            else:
+                state = dfa[state][str(gruFun[str(state)])]  
+
+
+        
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
         return jsonify(gruposFuncionales)    
 
     if request.method == 'GET':
