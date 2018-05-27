@@ -109,12 +109,13 @@ def gruposfuncionales():
         for c in gruFun :
             if state in accepting:
                 state = dfa[state][str(gruFun[str(state)])]
+                break
             else:
                 state = dfa[state][str(gruFun[str(state)])]  
 
 
         
-        #compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
         return jsonify(gruposFuncionales)    
 
     if request.method == 'GET':
