@@ -77,26 +77,22 @@ def gruposfuncionales():
         for ponderacion in uniqueGF.Ponderacion:
             sumaPonderacion = ponderacion + sumaPonderacion
 
-        dfa = {0:{'0':1, '1':3},
-               1:{'0':17, '1':2},
-               2:{'0':17, '1':12},
-               3:{'0':16, '1':4},
-               4:{'0':6, '1':5},
-               5:{'0':17, '1':7},
-               6:{'0':9, '1':8},
-               7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
-               8:{'0':'Basanita', '1':'Basanita'},
-               9:{'0':17, '1':11},
-               10:{'0':16, '1':15},
-               11:{'0':'Anhidrita', '1':'Anhidrita'},
-               12:{'0':'Cuarzo', '1':'Cuarzo'},
-               16:{'0':17, '1':18},
-               18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
-               17:{'0':'No se encontró', '1':'No se encontró'}
-              }
+        if (sumaPonderacion == 30):
+            compuesto = 'Yeso-Crudo'
+        elif (sumaPonderacion == 20):
+            compuesto = 'Basanita'
+        elif( sumaPonderacion == 19):
+            compuesto = 'Anhidrita'
+        elif (sumaPonderacion == 24):
+            compuesto = 'Calcita-Cuarzo'
+        elif (sumaPonderacion == 31):
+            compuesto = 'Calcita-Cuarzo'
+        else : 
+            compuesto = 'no se identifico' 
+
         
-        #compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
-        return jsonify(gruposFuncionales)    
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
+        return jsonify(compuestosGF)    
 
     if request.method == 'GET':
         return "Metodo Get"
