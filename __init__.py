@@ -70,42 +70,7 @@ def gruposfuncionales():
                 if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'estado':row['estado']})
         
-        GF = pd.DataFrame(gruposFuncionales)
-        compuestoEstado = []
-        uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
-        for estado in uniqueGF.estado:
-            compuestoEstado.append(estado)
-
-        dfa = {0:{'0':1, '1':3},
-               1:{'0':17, '1':2},
-               2:{'0':17, '1':12},
-               3:{'0':16, '1':4},
-               4:{'0':6, '1':5},
-               5:{'0':17, '1':7},
-               6:{'0':9, '1':8},
-               7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
-               8:{'0':'Basanita', '1':'Basanita'},
-               9:{'0':17, '1':11},
-               10:{'0':16, '1':15},
-               11:{'0':'Anhidrita', '1':'Anhidrita'},
-               12:{'0':'Cuarzo', '1':'Cuarzo'},
-               16:{'0':17, '1':18},
-               18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
-               17:{'0':'No se encontró', '1':'No se encontró'}
-              }
-
-    
-        gruFun={}
-        for key in dfa:
-            if key in compuestoEstado:
-                 state = 1 
-            else: 
-                state = 0
-            gruFun[str(key)]=state 
-
-        compuesto = accepts(dfa,0,{7,12,8,11,18,17},gruFun)
-        
-        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
+                
         return jsonify(compuestosGF)    
 
     if request.method == 'GET':
@@ -149,16 +114,8 @@ def after_request(response):
   response.headers.add('Access-Control-Allow-Credentials', 'true')
   return response
 
-  
-def accepts(transitions,initial,accepting,s):
-            state = initial
-            for c in s :
-                if state in accepting:
-                    state = transitions[state][str(gruFun[str(state)])]
-                    return state 
-                else:
-                    state = transitions[state][str(gruFun[str(state)])]
-            return state 
+
+
 
 if __name__ == "__main__":
     app.run()
