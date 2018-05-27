@@ -6,7 +6,6 @@ from scipy import signal
 import json
 import pymysql
 from flask_cors import CORS
-from Greetings import Greetings
 app = Flask(__name__)
 
 
@@ -87,13 +86,18 @@ def compuesto():
         for ponderacion in uniqueGF.Ponderacion:
             sumaPonderacion = ponderacion + sumaPonderacion
 
-        engine = Greetings()
-        engine.reset(sumaPonderacion = suma) # Prepare the engine for the execution.
-        engine.run() 
+        if sumaPonderacion == 30:
+            compuesto = 'Yeso-Crudo'
+        if sumaPonderacion == 20:
+            compuesto = 'Basanita'
+        if sumaPonderacion == 19:
+            compuesto = 'Anhidrita'
+        if sumaPonderacion == 24:
+            compuesto = 'Calcita-Cuarzo'
+        if sumaPonderacion == 31:
+            compuesto = 'Calcita-Cuarzo'   
 
-        compuestoClave = [[y for y in engine.facts[x].values()][0] for x in engine.facts if 'compuestos' in engine.facts[x].keys()] #[3]['compuestos']
-        compuestoClave[0] 
-        Compuesto = {'Compuesto':compuestoClave[0] }
+        Compuesto = {'Compuesto':compuesto}
         return jsonify(Compuesto)    
    
 
