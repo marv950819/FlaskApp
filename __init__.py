@@ -58,7 +58,7 @@ def gruposfuncionales():
         payload = []
         content = {}
         for result in rv:
-            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5],'Ponderacion':result[6]}
+            content = {'id_GF': result[0],'id_Compuesto':result[1] ,'name_Compuesto': result[2],'name_GF': result[3] , 'Rango1': result[4],'Rango2':result[5],'estado':result[6]}
             payload.append(content)
             content = {}
 
@@ -68,53 +68,52 @@ def gruposfuncionales():
         for index, row in gruposDb.iterrows():
             for index, coordenada in picos.iterrows():
                 if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
-                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'Ponderacion':row['Ponderacion']})
+                    gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'estado':row['estado']})
         
         GF = pd.DataFrame(gruposFuncionales)
-
+        compuestoPonderacion = []
         uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
-        sumaPonderacion = 0
-        for ponderacion in uniqueGF.Ponderacion:
-            sumaPonderacion = ponderacion + sumaPonderacion
+        for estado in uniqueGF.estado:
+            compuestoEstado.append(estado)
 
         dfa = {0:{'0':1, '1':3},
-           1:{'0':17, '1':2},
-           2:{'0':17, '1':12},
-           3:{'0':16, '1':4},
-           4:{'0':6, '1':5},
-           5:{'0':17, '1':7},
-           6:{'0':9, '1':8},
-           7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
-           8:{'0':10, '1':10},
-           9:{'0':17, '1':11},
-           10:{'0':16, '1':15},
-           11:{'0':10, '1':10},
-           12:{'0':'Cuarzo', '1':'Cuarzo'},
-           16:{'0':17, '1':18},
-           18:{'0':17, '1':19},
-           17:{'0':17, '1':17}
-        }
+               1:{'0':17, '1':2},
+               2:{'0':17, '1':12},
+               3:{'0':16, '1':4},
+               4:{'0':6, '1':5},
+               5:{'0':17, '1':7},
+               6:{'0':9, '1':8},
+               7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
+               8:{'0':'Basanita', '1':'Basanita'},
+               9:{'0':17, '1':11},
+               10:{'0':16, '1':15},
+               11:{'0':'Anhidrita', '1':'Anhidrita'},
+               12:{'0':'Cuarzo', '1':'Cuarzo'},
+               16:{'0':17, '1':18},
+               18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
+               17:{'0':'No se encontró', '1':'No se encontró'}
+              }
 
 
         def accepts(transitions,initial,accepting,s):
             state = initial
             for c in s :
                 if state in accepting:
-                    state = transitions[state][c]
+                    state = transitions[state][str(gruFun[str(state)])]
                     return state 
                 else:
-                    state = transitions[state][c]
+                    state = transitions[state][str(gruFun[str(state)])]
             return state 
             
-        gruFun=''
-        s = [1,2]
-        for a in dfa:
-            if a in s:
+        gruFun={}
+        for key in dfa:
+            if key in compuestoEstado:
                  state = 1 
             else: 
                 state = 0
-            gruFun = gruFun +str(state)
-        compuesto = accepts(dfa,0,{7,12,8,11,19},gruFun)
+            gruFun[str(key)]=state 
+
+        compuesto = accepts(dfa,0,{7,12,8,11,18,17},gruFun)
         
         compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}                 
         return jsonify(compuestosGF)    

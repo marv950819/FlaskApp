@@ -16,66 +16,11 @@ CREATE TABLE GruposFuncionales(
   name_GF VARCHAR(30),
   Rango1 INT,
   Rango2 INT,
-  Ponderacion INT,
+  estado INT,
   PRIMARY KEY (id_GF),
   CONSTRAINT fk_id_Compuesto FOREIGN KEY (id_Compuesto) REFERENCES Compuesto(id_Compuesto)
 )
 ENGINE = INNODB;
-
-create table Compuesto_GF(
-  id_GF int,
-  id_Compuesto int,
-  CONSTRAINT fk_id_GF FOREIGN KEY (id_GF) REFERENCES  GruposFuncionales(id_GF),
-  CONSTRAINT fk_id_Compuesto FOREIGN KEY (id_Compuesto) REFERENCES Compuesto(id_Compuesto)
-)
-ENGINE = INNODB;
-
-
-
-INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,Ponderacion) VALUES
-("Yeso","H20", 3500, 3600, 3),
-("Yeso","SO4-2H2O", 3385, 3405, 7),
-("Yeso","SO4-2H2O", 3479,3499, 7),
-("Yeso","SO4-2H2O", 1016, 1018, 7),
-("Yeso","SO4-2H2O", 1125, 1145, 7),
-("Yeso","SO4", 864, 884, 4),
-("Yeso","SO4", 670,682 , 4),
-("Yeso","SO4-1/2H2O", 1004,1015, 5),
-("Yeso","CaC03", 722,732, 8),
-("Yeso","CaC03", 1415,1435, 8),
-("Yeso","CaC03", 872,900, 8);
-
-
-INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,Ponderacion) VALUES
-("Cuarzo","Si-O", 1100,1200, 6),
-("Cuarzo","Si-O-Si", 1000,1100, 4),
-("Cuarzo","Si-O", 770,800, 4),
-("Cuarzo","Si-O", 400,550, 4);
-
-
-(, "CaSO4-1/2H2O", 999,1017),
-(, "CaC03", 722,732);
-(, "CaC03", 1415,1435);
-(, "CaC03", 872,900);
-
-INSERT INTO Compuesto(name_Compuesto,formula,Descripcion,Area,Concentacion) VALUES
-("Yeso-Crudo", "", "Yeso con porcentaje de agua",0,"");
-
-
-INSERT INTO Compuesto(name_Compuesto,formula,Descripcion,Area,Concentacion) VALUES
-("Cuarzo","", "Cuarzo seco",0,"");
-
-INSERT INTO Compuesto_GF(id_GF,id_Compuesto) VALUES
-(1,236),
-(2,236),
-(3,236),
-(4,236),
-(5,236),
-(6,236),
-(13,239),
-(14,239),
-(15,239),
-(16,239);
 
 DELIMITER //
 CREATE TRIGGER Compuesto_GF
@@ -87,3 +32,35 @@ BEGIN
 
 END// 
 DELIMITER ;
+
+
+
+INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,estado) VALUES
+("Yeso","H20", 3500, 3600, 5),
+("Yeso","SO4-2H2O", 3385, 3405, 4),
+("Yeso","SO4-2H2O", 3479,3499, 4),
+("Yeso","SO4-2H2O", 1016, 1018, 4),
+("Yeso","SO4-2H2O", 1125, 1145, 4),
+("Yeso","SO4", 864, 884, 9),
+("Yeso","SO4", 670,682 , 9),
+("Yeso","SO4-1/2H2O", 1004,1015, 6),
+("Yeso","CaC03", 722,732, 3),
+("Yeso","C-O", 1415,1435, 0),
+("Yeso","CaC03", 872,900, 3);
+
+
+INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,estado) VALUES
+("Cuarzo","Si-O", 1100,1200, 2),
+("Cuarzo","Si-O-Si", 1000,1100, 1),
+("Cuarzo","Si-O", 770,800, 2),
+("Cuarzo","Si-O", 400,550, 2);
+
+
+INSERT INTO Compuesto(name_Compuesto,formula,Descripcion,Area,Concentacion) VALUES
+("Yeso-Crudo", "", "Yeso con porcentaje de agua",0,"");
+
+
+INSERT INTO Compuesto(name_Compuesto,formula,Descripcion,Area,Concentacion) VALUES
+("Cuarzo","", "Cuarzo seco",0,"");
+
+
