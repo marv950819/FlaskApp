@@ -71,7 +71,7 @@ def gruposfuncionales():
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'estado':row['estado']})
         
         GF = pd.DataFrame(gruposFuncionales)
-        compuestoPonderacion = []
+        compuestoEstado = []
         uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
         for estado in uniqueGF.estado:
             compuestoEstado.append(estado)
