@@ -94,17 +94,7 @@ def gruposfuncionales():
                17:{'0':'No se encontró', '1':'No se encontró'}
               }
 
-
-        def accepts(transitions,initial,accepting,s):
-            state = initial
-            for c in s :
-                if state in accepting:
-                    state = transitions[state][str(gruFun[str(state)])]
-                    return state 
-                else:
-                    state = transitions[state][str(gruFun[str(state)])]
-            return state 
-            
+    
         gruFun={}
         for key in dfa:
             if key in compuestoEstado:
@@ -159,6 +149,16 @@ def after_request(response):
   response.headers.add('Access-Control-Allow-Credentials', 'true')
   return response
 
+  
+def accepts(transitions,initial,accepting,s):
+            state = initial
+            for c in s :
+                if state in accepting:
+                    state = transitions[state][str(gruFun[str(state)])]
+                    return state 
+                else:
+                    state = transitions[state][str(gruFun[str(state)])]
+            return state 
 
 if __name__ == "__main__":
     app.run()
