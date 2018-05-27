@@ -79,13 +79,13 @@ def gruposfuncionales():
 
         if (sumaPonderacion == 30):
             compuesto = 'Yeso-Crudo'
-        if (sumaPonderacion == 20):
+        elif (sumaPonderacion == 20):
             compuesto = 'Basanita'
-        if( sumaPonderacion == 19):
+        elif( sumaPonderacion == 19):
             compuesto = 'Anhidrita'
-        if (sumaPonderacion == 24):
+        elif (sumaPonderacion == 24):
             compuesto = 'Calcita-Cuarzo'
-        if (sumaPonderacion == 31):
+        elif (sumaPonderacion == 31):
             compuesto = 'Calcita-Cuarzo'
         else : 
             compuesto = 'no se identifico' 
