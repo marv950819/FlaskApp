@@ -77,19 +77,19 @@ def gruposfuncionales():
         for ponderacion in uniqueGF.Ponderacion:
             sumaPonderacion = ponderacion + sumaPonderacion
 
-        if sumaPonderacion == 30:
+        if (sumaPonderacion == 30):
             compuesto = 'Yeso-Crudo'
-        if sumaPonderacion == 20:
+        if (sumaPonderacion == 20):
             compuesto = 'Basanita'
-        if sumaPonderacion == 19:
+        if( sumaPonderacion == 19):
             compuesto = 'Anhidrita'
-        if sumaPonderacion == 24:
+        if (sumaPonderacion == 24):
             compuesto = 'Calcita-Cuarzo'
-        if sumaPonderacion == 31:
+        if (sumaPonderacion == 31):
             compuesto = 'Calcita-Cuarzo'
         else : 
             compuesto = 'no se identifico' 
-              
+
         gruposFuncionales.append({'sumaPonderacion':sumaPonderacion})     
         gruposFuncionales.append({'Compuesto':compuesto})           
         return jsonify(gruposFuncionales)    
