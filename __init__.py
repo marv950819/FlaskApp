@@ -88,11 +88,11 @@ def gruposfuncionales():
         elif (sumaPonderacion == 31):
             compuesto = 'Calcita-Cuarzo'
         else : 
-            compuesto = 'no se identifico' 
+            compuesto = 'no se identificó el compuesto' 
 
-        gruposFuncionales.append({'sumaPonderacion':sumaPonderacion})     
-        gruposFuncionales.append({'Compuesto':compuesto})           
-        return jsonify(gruposFuncionales)    
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}    
+                 
+        return jsonify(compuestosGF)    
 
     if request.method == 'GET':
         return "Metodo Get"
