@@ -114,7 +114,7 @@ def gruposfuncionales():
 
 
         
-        compuestosGF = {'Compuesto':state}       
+        compuestosGF = {'Compuesto':str(state)}       
         return jsonify(compuestosGF)    
 
     if request.method == 'GET':
