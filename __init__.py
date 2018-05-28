@@ -79,8 +79,37 @@ def gruposfuncionales():
                 estado = 9
             compuestoEstado.append(estado)
     
-      
-        return jsonify(gruposFuncionales)    
+
+
+        dfa = {'A':{1:'B', 2:'B',3:'C'},
+        'B':{3:'J', 4:'J',6:'E',8:'H',7:'G'},
+        'C':{4:'I'},
+        'E':{5:'F'},
+        'F':{0:'Yeso-Crudo',9:'F',9:'F'},
+        'G':{0:'Basanita',9:'G',9:'G'},
+        'H':{0:'Anhidrita',9:'H',9:'H'},
+        'I':{0:'Cuarzo'},
+        'J':{0:'Calcita-Cuarzo'},
+        'K':{0:'No se ha encontrado'}
+        }
+
+
+        
+        state = 'A'
+        accepting = {'F','G','H','I','J'}
+        for index,item in enumerate(compuestoEstado) :
+            if item in dfa[state].keys():
+                state = dfa[state][item]  
+            else:
+                compuestoEstado.append(item)
+            
+            if state in accepting:
+                state = dfa[state][0]
+                break
+
+            
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
+        return jsonify(compuestosGF)    
 
     if request.method == 'GET':
         return "Metodo Get"
