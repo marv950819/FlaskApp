@@ -98,6 +98,7 @@ def gruposfuncionales():
         state = 'A'
         accepting = {'F','G','H','I','J'}
         for index,item in enumerate(compuestoEstado) :
+            auxitem = item
             if item in dfa[state].keys():
                 state = dfa[state][item]  
             else:
@@ -106,7 +107,12 @@ def gruposfuncionales():
             if state in accepting:
                 compuesto = dfa[state][0]
                 break
+            if auxitem == compuestoEstado[index+1]:
+                compuesto = dfa['K'][0]
+                break
             
+        if state not in accepting:
+            compuesto = dfa['K'][0]
       
         compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}       
         return jsonify(compuestosGF)    
