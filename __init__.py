@@ -69,8 +69,52 @@ def gruposfuncionales():
             for index, coordenada in picos.iterrows():
                 if int(coordenada.x) in range(row['Rango1'],row['Rango2']):  
                     gruposFuncionales.append({'x':coordenada.x,'y':coordenada.y,'id_GF': row['id_GF'], 'grupoF':row['name_GF'] , 'Rango1': row['Rango1'],'Rango2':row['Rango2'],'estado':row['estado']})
-              
-        return jsonify(gruposFuncionales)    
+        
+        GF = pd.DataFrame(gruposFuncionales)
+
+        uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
+        compuestoEstado=[]
+        for estado in uniqueGF.estado:
+            if ((estado==3)|(estado==4)) & ((1 in uniqueGF.estado)|(2 in uniqueGF.estado)):
+                estado = 9
+            compuestoEstado.append(estado)
+    
+
+
+        dfa = {'A':{1:'B', 2:'B',3:'C'},
+        'B':{3:'J', 4:'J',6:'E',8:'H',7:'G'},
+        'C':{4:'I'},
+        'E':{5:'F'},
+        'F':{0:'Yeso-Crudo',9:'F',9:'F'},
+        'G':{0:'Basanita',9:'G',9:'G'},
+        'H':{0:'Anhidrita',9:'H',9:'H'},
+        'I':{0:'Cuarzo'},
+        'J':{0:'Calcita-Cuarzo'},
+        'K':{0:'No se ha encontrado'}
+        }
+
+
+        
+        state = 'A'
+        accepting = {'F','G','H','I','J'}
+        for index,item in enumerate(compuestoEstado) :
+            if item in dfa[state].keys():
+                state = dfa[state][item]  
+            else:
+                compuestoEstado.append(item)
+            
+            if state in accepting:
+                compuesto = dfa[state][0]
+                break
+            if auxitem == compuestoEstado[index+1]:
+                compuesto = dfa['K'][0]
+                break
+            
+        if state not in accepting:
+            compuesto = dfa['K'][0]
+      
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}       
+        return jsonify(compuestosGF)    
 
     if request.method == 'GET':
         return "Metodo Get"
