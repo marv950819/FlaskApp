@@ -75,7 +75,7 @@ def gruposfuncionales():
         uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
         compuestoEstado=[]
         for estado in uniqueGF.estado:
-            if (estado==3) & ((1 in uniqueGF.estado)|(2 in uniqueGF.estado)):
+            if ((estado==3)|(estado==4)) & ((1 in uniqueGF.estado)|(2 in uniqueGF.estado)):
                 estado = 9
             compuestoEstado.append(estado)
     
