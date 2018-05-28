@@ -75,47 +75,39 @@ def gruposfuncionales():
         uniqueGF = GF.drop_duplicates(subset='grupoF', keep="last")
         compuestoEstado=[]
         for estado in uniqueGF.estado:
+            if (estado==3) & ((1 in uniqueGF.estado)|(2 in uniqueGF.estado)):
+                estado = 9
             compuestoEstado.append(estado)
+    
 
-        dfa = {0:{'0':1, '1':3},
-        1:{'0':3, '1':2},
-        2:{'0':17, '1':3},
-        3:{'0':16, '1':4},
-        4:{'0':6, '1':5},
-        5:{'0':17, '1':7},
-        6:{'0':9, '1':8},
-        7:{'0':'Yeso-Crudo', '1':'Yeso-Crudo'},
-        8:{'0':'Basanita', '1':'Basanita'},
-        9:{'0':17, '1':11},
-        10:{'0':16, '1':15},
-        11:{'0':'Anhidrita', '1':'Anhidrita'},
-        12:{'0':'Cuarzo', '1':'Cuarzo'},
-        16:{'0':17, '1':18},
-        18:{'0':'Calcita-Cuarzo', '1':'Calcita-Cuarzo'},
-        17:{'0':'No se ha encontrado', '1':'No se ha encontrado'}
-       
+
+        dfa = {'A':{1:'B', 2:'B',3:'C'},
+        'B':{3:'J', 4:'J',6:'E',8:'H',7:'G'},
+        'C':{4:'I'},
+        'E':{5:'F'},
+        'F':{0:'Yeso-Crudo',9:'F',9:'F'},
+        'G':{0:'Basanita',9:'G',9:'G'},
+        'H':{0:'Anhidrita',9:'H',9:'H'},
+        'I':{0:'Cuarzo'},
+        'J':{0:'Calcita-Cuarzo'},
+        'K':{0:'No se ha encontrado'}
         }
-          
-
-        gruFun={}
-        for key in dfa:
-            if key in compuestoEstado:
-                state = 1 
-            else: 
-                state = 0
-            gruFun[str(key)]=state 
-
-        state = 0
-        accepting = {7,12,8,11,18,17}
-        for c in gruFun :
-            if state in accepting:
-                state = dfa[state][str(gruFun[str(state)])]
-                break
-            else:
-                state = dfa[state][str(gruFun[str(state)])]  
 
 
         
+        state = 'A'
+        accepting = {'F','G','H','I','J'}
+        for index,item in enumerate(compuestoEstado) :
+            if item in dfa[state].keys():
+                if state in accepting:
+                    state = dfa[state][0]
+                    break
+                else:
+                    state = dfa[state][item]  
+            else:
+                compuestoEstado.append(item)
+
+            
         compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
         return jsonify(compuestosGF)    
 

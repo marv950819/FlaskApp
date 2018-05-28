@@ -37,23 +37,23 @@ DELIMITER ;
 
 INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,estado) VALUES
 ("Yeso","H20", 3500, 3600, 5),
-("Yeso","SO4-2H2O", 3385, 3405, 4),
-("Yeso","SO4-2H2O", 3479,3499, 4),
-("Yeso","SO4-2H2O", 1016, 1018, 4),
-("Yeso","SO4-2H2O", 1125, 1145, 4),
-("Yeso","SO4", 864, 884, 9),
-("Yeso","SO4", 670,682 , 9),
-("Yeso","SO4-1/2H2O", 1004,1015, 6),
-("Yeso","CaC03", 722,732, 3),
-("Yeso","C-O", 1415,1435, 0),
-("Yeso","CaC03", 872,900, 3);
+("Yeso","SO4-2H2O", 3385, 3405, 6),
+("Yeso","SO4-2H2O", 3479,3499, 6),
+("Yeso","SO4-2H2O", 1016, 1018, 6),
+("Yeso","SO4-2H2O", 1125, 1145, 6),
+("Yeso","SO4", 864, 884, 8),
+("Yeso","SO4", 670,682 , 8),
+("Yeso","SO4-1/2H2O", 1004,1015, 7),
+("Yeso","CaC03", 722,732, 2),
+("Yeso","CaC03", 1415,1435, 1),
+("Yeso","CaC03", 872,900, 2);
 
 
 INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,estado) VALUES
-("Cuarzo","Si-O", 1100,1200, 2),
-("Cuarzo","Si-O-Si", 1000,1100, 1),
-("Cuarzo","Si-O", 770,800, 2),
-("Cuarzo","Si-O", 400,550, 2);
+("Cuarzo","Si-O", 1100,1200, 4),
+("Cuarzo","Si-O-Si", 1000,1100, 3),
+("Cuarzo","Si-O", 770,800, 3),
+("Cuarzo","Si-O", 400,550, 3);
 
 
 INSERT INTO Compuesto(name_Compuesto,formula,Descripcion,Area,Concentacion) VALUES
