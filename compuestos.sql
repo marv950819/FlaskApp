@@ -41,7 +41,7 @@ INSERT INTO GruposFuncionales(name_Compuesto,name_GF,Rango1,Rango2,estado) VALUE
 ("Yeso","SO4-2H2O", 3479,3499, 6),
 ("Yeso","SO4-2H2O", 1016, 1018, 6),
 ("Yeso","SO4-2H2O", 1125, 1145, 6),
-("Yeso","SO4", 864, 884, 8),
+("Yeso","SO4", 864, 870, 8),
 ("Yeso","SO4", 670,682 , 8),
 ("Yeso","SO4-1/2H2O", 1004,1015, 7),
 ("Yeso","CaC03", 722,732, 2),

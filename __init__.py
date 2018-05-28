@@ -104,11 +104,12 @@ def gruposfuncionales():
                 compuestoEstado.append(item)
             
             if state in accepting:
-                state = dfa[state][0]
+                compuesto = dfa[state][0]
                 break
-
-            
-        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':state}       
+        if state not in accepting:
+            compuesto = dfa['K'][0]
+      
+        compuestosGF = {'GruposFuncionales':gruposFuncionales,'Compuesto':compuesto}       
         return jsonify(compuestosGF)    
 
     if request.method == 'GET':
